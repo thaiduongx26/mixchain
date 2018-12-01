@@ -9,6 +9,7 @@
       manifest.json provides metadata used when your web app is added to the
       homescreen on Android. See https://developers.google.com/web/fundamentals/web-app-manifest/
     -->
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <link rel="manifest" href="manifest.json">
 
@@ -19,6 +20,7 @@
 
     <!-- Latest compiled and minified JavaScript -->
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.js"></script>
     <style>
 
       * {
@@ -30,6 +32,10 @@
       }
       .container-search-big {
            margin-top: 50px;
+      }
+
+      .container-table-data{
+        margin-top: 50px;
       }
       .autocomplete {
         /*the container must be positioned relative:*/
@@ -54,7 +60,9 @@
         color: #fff;
         cursor: pointer;
       }
-
+      .btn-make-invoid{
+        margin-top: 20px;
+      }
       .autocomplete-items {
         position: absolute;
         border: 1px solid #d4d4d4;
@@ -66,7 +74,10 @@
         left: 0;
         right: 0;
       }
-
+      .info-car{
+        /*margin-top: 20px;*/
+        text-align: left;
+      }
       .autocomplete-items div {
         padding: 10px;
         cursor: pointer;
@@ -89,14 +100,122 @@
   <body>
     <div id="root">
       <div class="container container-search-big">
-        <form autocomplete="off" action="">
-          <div class="autocomplete" style="width:300px;">
-            <input id="myInput" type="text" name="myCountry" placeholder="Country">
+        <div class="row">
+          <div class="col-xs-5">
+            <form autocomplete="off" action="">
+              <div class="autocomplete" style="width:300px;">
+                <input id="myInput" type="text" name="myCountry" placeholder="idCar">
+              </div>
+            </form>
+            <button type="button" class="btn btn-info btn-lg" style="margin-top: 20px" data-toggle="modal" data-target="#myModal">Create invoice</button>
           </div>
-          <input type="submit">
-        </form>
+          <div class="col-xs-4">
+            <div class="info-car">
+              <p id="model"><b>Model: BMW M1 Procar</b></p>
+              <p id="brand"><b>Brand: BMW</b></p>
+            </div>
+          </div>
+          <div class="col-xs-3">
+            <img src="8198.jpg" width="250" height="120">
+          </div>
+        </div>
+        
+        
+
       </div>
+
+      <div class="container container-table-data">
+        <table id="table_id" class="display">
+          <thead>
+              <tr>
+                  <th>InvoiceID</th>
+                  <th>CarID</th>
+                  <th>Status</th>
+                  <th>Amount</th>
+              </tr>
+          </thead>
+          <tbody>
+              <tr>
+                  <td>IN561264</td>
+                  <td>ID10002</td>
+                  <td>Pending</td>
+                  <td>15$</td>
+              </tr>
+              <tr>
+                  <td>IN984315</td>
+                  <td>ID10004</td>
+                  <td>Done</td>
+                  <td>153$</td>
+              </tr>
+              <tr>
+                  <td>IN561435</td>
+                  <td>ID85124</td>
+                  <td>Done</td>
+                  <td>200$</td>
+              </tr>
+              <tr>
+                  <td>IN956317</td>
+                  <td>ID13597</td>
+                  <td>Pending</td>
+                  <td>50$</td>
+              </tr>
+          </tbody>
+        </table>
+    </div>
+    </div>
+    <div class="modal fade" id="myModal" role="dialog">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title">Create invoice for ID10003</h4>
+        </div>
+        <div class="modal-body">
+          
+          <table class="table">
+            <thead>
+              <tr>
+                <th scope="col">Name</th>
+                <th scope="col">Quantity</th>
+                <th scope="col">Unit price</th>
+                <th scope="col">Total price</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Item #1</td>
+                <td>1</td>
+                <td>$200.00</td>
+                <td>$200.00</td>
+              </tr>
+              <tr>
+                <td>Item #2</td>
+                <td>2</td>
+                <td>$300.00</td>
+                <td>$600.00</td>
+              </tr>
+              <tr>
+                <td>Item #3</td>
+                <td>5</td>
+                <td>$30.00</td>
+                <td>$150.00</td>
+              </tr>
+            </tbody>
+          </table>
+          <button type="button" class="btn btn-success" data-dismiss="modal">More</button>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Submit</button>
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+      
     </div>
     <script src="js/search.js"></script>
+    <script>
+      $(document).ready( function () {
+        $('#table_id').DataTable();
+      });
+    </script>
   </body>
 </html>
